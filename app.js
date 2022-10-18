@@ -3,7 +3,7 @@ let data = [];
 
 let currentImageName = "";
 
-const WEBSITE = "http://localhost:8080/"; // replace with the server IP address, or with window.location.href if you're hosting the app.html on the same server
+const WEBSITE = "http://localhost:8080/datagen"; // replace with the server IP address, or with window.location.href if you're hosting the app.html on the same server
 
 function setImageVisibility(id, visible) {
    document.getElementById(id).style.visibility = (visible ? "visible" : "hidden");
@@ -16,10 +16,6 @@ function hideQOLElements() {
     setImageVisibility("line_2", false);
     setImageVisibility("line_3", false);
     setImageVisibility("line_4", false);
-}
-
-function distanceFormula(x1, y1, x2, y2) {
-    return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
 }
 
 function showUserMessage(msg) {
@@ -51,6 +47,8 @@ function getImage() {
             currentImageName = data.name;
             putImageOnPage(data.img);
             showUserMessage("You have clicked 0 times.");
+
+            document.getElementById("instructions").innerHTML = "Find all blue colored balls. Click on a top left corner and a bottom right corner that would enclose the ball. If there is no ball, click on the checkbox below. Hit 'Send' when done.";
         }, (error) => {
             showUserMessage("Error getting image from the server: " + error);
         });
@@ -61,7 +59,7 @@ function getImage() {
 
 function postData(data) {
     showUserMessage("Sending data to server...");
-    let body = JSON.stringify({name: currentImageName, hasBall: document.getElementById("no_ball").checked, data: data});
+    let body = JSON.stringify({name: currentImageName, noBall: document.getElementById("no_ball").checked, data: data});
 
     fetch(WEBSITE, {method: "POST", body: body}).then(() => {
     }, (error) => {
@@ -134,4 +132,11 @@ function handleAll() {
 
     postData(getDataFromPage());
     getImage();
+}
+
+function reset() {
+    hideQOLElements();
+    clickCount = 0;
+    data = [];
+    showUserMessage("You have clicked 0 times.");
 }
