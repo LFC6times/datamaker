@@ -97,7 +97,7 @@ const server = http.createServer((req, res) => {
 });
 
 try {
-    server.listen(8080);
+    server.listen(80); // HTTP port
 } catch (e) {
     saveData();
     console.log("error: " + e);
