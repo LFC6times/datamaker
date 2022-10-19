@@ -27,7 +27,7 @@ function putImageOnPage(image) {
     if(image === undefined) {
         img.alt = "No image found";
     }
-    img.src = "data:image/png;base64," + image;
+    img.src = "data:image/jpeg;base64," + image;
     document.getElementById("image").image = img;
 }
 
@@ -44,7 +44,7 @@ function getImage() {
         }
 
         response.json().then((data) => {
-            currentImageName = data.name;
+            currentImageName = data.imgName;
             putImageOnPage(data.img);
             showUserMessage("You have clicked 0 times.");
 
@@ -59,7 +59,7 @@ function getImage() {
 
 function postData(data) {
     showUserMessage("Sending data to server...");
-    let body = JSON.stringify({name: currentImageName, noBall: document.getElementById("no_ball").checked, data: data});
+    let body = JSON.stringify({imgName: currentImageName, noBall: document.getElementById("no_ball").checked, data: data});
 
     fetch(WEBSITE, {method: "POST", body: body}).then(() => {
     }, (error) => {
@@ -128,9 +128,8 @@ function getDataFromPage() {
 function handleAll() {
     clickCount = 0;
     data = [];
-    currentImageName = "";
-
     postData(getDataFromPage());
+    currentImageName = "";
     getImage();
 }
 

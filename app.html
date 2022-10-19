@@ -6,7 +6,7 @@
         </head>
         <style>
             .image_wrapper {
-                position: relative;
+                position: absolute;
             }
             .qol {
                 position: absolute;
@@ -18,11 +18,22 @@
             }
 
             .user_input {
-                position: absolute;
+                position: relative;
             }
         </style>
         <body onload="getImage()">
             <script src="app.js"></script>
+
+            <div class="user_input">
+                <p id="instructions"></p>
+                <label for="no_ball">No ball in image</label>
+                <input type="checkbox" id="no_ball" name="no_ball" value="no ball">
+                <p></p>
+                <p></p>
+                <button id="reset" onclick="reset()">Reset</button>
+                <button id="button" onclick="handleAll()">Send</button>
+                <p id="message"></p>
+            </div>
 
             <div class="image_wrapper">
                 <div class="qol">
@@ -34,17 +45,6 @@
                 <hr class="qol overlay" id="line_2" style="height:8px; background-color: black; visibility: hidden; transform-origin: top left">
                 <hr class="qol overlay" id="line_3" style="height:8px; background-color: black; visibility: hidden; transform-origin: top left">
                 <hr class="qol overlay" id="line_4" style="height:8px; background-color: black; visibility: hidden; transform-origin: top left">
-            </div>
-
-            <div class="user_input">
-                <p id="instructions"></p>
-                <label for="no_ball">No ball in image</label>
-                <input type="checkbox" id="no_ball" name="no_ball" value="no ball">
-                <p></p>
-                <p></p>
-                <button id="reset" onclick="reset()">Reset</button>
-                <button id="button" onclick="handleAll()">Send</button>
-                <p id="message"></p>
             </div>
         </body>
     </html>
