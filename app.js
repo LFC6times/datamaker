@@ -3,7 +3,7 @@ let data = [];
 
 let currentImageName = "";
 
-const WEBSITE = window.location.href + "/datagen"; // replace with the server IP address, or with window.location.href if you're hosting the app.html on the same server
+const WEBSITE = window.location.href + "datagen"; // replace with the server IP address, or with window.location.href if you're hosting the app.html on the same server
 
 function setImageVisibility(id, visible) {
    document.getElementById(id).style.visibility = (visible ? "visible" : "hidden");
