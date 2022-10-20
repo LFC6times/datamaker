@@ -36,15 +36,18 @@
             </div>
 
             <div class="image_wrapper">
-                <div class="qol">
-                    <img id="image" onclick="clickHandler(event)" alt="this should be an image." src="">
+                <img id="image" alt="this should be an image." src="">
+                <div class="qol overlay">
+                    <hr class="qol overlay" ondragover="" ondrop="" id="line_1" style="height:6px; background-color: black; visibility: hidden; transform-origin: top left">
+                    <hr class="qol overlay" ondragover="" ondrop="" id="line_2" style="height:6px; background-color: black; visibility: hidden; transform-origin: top left">
+                    <hr class="qol overlay" ondragover="" ondrop="" id="line_3" style="height:6px; background-color: black; visibility: hidden; transform-origin: top left">
+                    <hr class="qol overlay" ondragover="" ondrop="" id="line_4" style="height:6px; background-color: black; visibility: hidden; transform-origin: top left">
                 </div>
-                <hr class="qol overlay" id="point_1" style="width: 10px; height: 10px; background-color: black; visibility: hidden">
-                <hr class="qol overlay" id="point_2" style="width: 10px; height: 10px; background-color: black; visibility: hidden; transform-origin: top left; transform: rotate(-90deg)">
-                <hr class="qol overlay" id="line_1" style="height:8px; background-color: black; visibility: hidden; transform-origin: top left">
-                <hr class="qol overlay" id="line_2" style="height:8px; background-color: black; visibility: hidden; transform-origin: top left">
-                <hr class="qol overlay" id="line_3" style="height:8px; background-color: black; visibility: hidden; transform-origin: top left">
-                <hr class="qol overlay" id="line_4" style="height:8px; background-color: black; visibility: hidden; transform-origin: top left">
+                <div id="overlay_wrapper" class="qol overlay" ondrop="drop(event)" onclick="clickHandler(event)" ondragover="allowDrop(event)" style="height: 1920px; width: 1920px">
+                    <hr class="qol overlay" ondragover="" ondrop="" id="point_1" draggable="true" ondragstart="drag(event)" style="width: 10px; height: 10px; background-color: green; visibility: hidden">
+                    <hr class="qol overlay" ondragover="" ondrop="" id="point_2" draggable="true" ondragstart="drag(event)" style="width: 10px; height: 10px; background-color: green; visibility: hidden; transform-origin: top left; transform: rotate(-90deg)">
+                </div>
+
             </div>
         </body>
     </html>
