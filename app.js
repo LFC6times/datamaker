@@ -1,9 +1,12 @@
+// replace with the image server IP address,
+// or with window.location.href if you're hosting the app.html on the same server (default setup with server.js)
+const WEBSITE = window.location.href + "datagen";
+
+
 let clickCount = 0;
 let data = [];
 
 let currentImageName = "";
-
-const WEBSITE = window.location.href + "datagen"; // replace with the server IP address, or with window.location.href if you're hosting the app.html on the same server
 
 function setImageVisibility(id, visible) {
    document.getElementById(id).style.visibility = (visible ? "visible" : "hidden");
@@ -31,9 +34,10 @@ function putImageOnPage(image) {
     document.getElementById("image").image = img;
 
     setTimeout(() => {
+        // Needed so the overlaid div extends properly.
         document.getElementById("overlay_wrapper").style.height = document.getElementById("image").height + "px";
-        document.getElementById("overlay_wrapper").style.width = document.getElementById("image").width + "px"; // Needed so the overlaid div extends properly.
-    }, 0); // this made the code work??? i assume setting the element isn't instant and waiting for next event cycle via timeout fixes :P
+        document.getElementById("overlay_wrapper").style.width = document.getElementById("image").width + "px";
+    }, 0); // this makes code work somehow, apparently setting element isn't instant and setTimeout(0) waits until end of current event cycle, which is long enough to set the elements
 }
 
 function getImage() {

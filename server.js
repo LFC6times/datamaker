@@ -1,8 +1,8 @@
 const TESTING = false; // set to false before actual use
 const PORT = 80; // HTTP, but means you'll need to use `sudo` to run the server on Linux
 
-const IMAGE_FOLDER_NAME = "./images";
-const DATA_OUTPUT_FOLDER_NAME = "./data";
+const IMAGE_FOLDER_NAME = "./images"; // No trailing slash should be here
+const DATA_OUTPUT_FOLDER_NAME = "./data"; // No trailing slash should be here
 
 // Kinda config stuff above
 
@@ -38,14 +38,14 @@ if(!fs.existsSync(DATA_OUTPUT_FOLDER_NAME)) {
     }
 }
 
-fs.readdirSync("./images").forEach((file) => {
+fs.readdirSync(IMAGE_FOLDER_NAME).forEach((file) => {
     if(!file.endsWith(".ini")) { // ignore ini files because they're weird (thanks windows)
         toSend.push(file);
     }
 });
 
 let nextFileVal = 0;
-fs.readdirSync("./data").forEach((file) => {
+fs.readdirSync(DATA_OUTPUT_FOLDER_NAME).forEach((file) => {
     if(file.endsWith(".json")) {
         let value = file.slice(4, -5); // remove the .json extension and the word "data" in front
         if(Number.parseInt(value) >= nextFileVal) {
@@ -59,7 +59,7 @@ console.log("data to send: " + toSend);
 function saveData() {
     let writtenData = "";
     try {
-        fs.writeFileSync(`./data/data${nextFileVal++}.json`, JSON.stringify(Array.from(processedData.entries())));
+        fs.writeFileSync(`${DATA_OUTPUT_FOLDER_NAME}/data${nextFileVal++}.json`, JSON.stringify(Array.from(processedData.entries())));
         processedData.forEach((value, key) => {
             writtenData += key + "\n"; // shouldn't I like just write the keys and values together? TODO: rewrite later when I look at what 2 months ago me was thinking
         });
@@ -96,7 +96,7 @@ const server = http.createServer((req, res) => {
                 res.writeHead(200, {"Content-Type": "application/json", "Access-Control-Allow-Origin": "*"});
                 let send = toSend[toSend.length - 1];
                 console.log("send: " + send);
-                let img = new Buffer(fs.readFileSync("./images/" + send)).toString("base64");
+                let img = new Buffer(fs.readFileSync(`${IMAGE_FOLDER_NAME}/` + send)).toString("base64");
                 res.write(JSON.stringify({img: img, imgName: send}));
                 res.end();
 
